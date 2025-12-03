@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mahasiswa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-user-graduate text-3xl"></i>
+                <div>
+                    <h1 class="text-2xl font-bold">Dashboard Mahasiswa</h1>
+                    <p class="text-blue-100 text-sm">Portal Data Alumni</p>
+                </div>
+            </div>
+
+            <!-- User Info & Logout -->
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <p class="font-semibold" id="mahasiswaNama">Loading...</p>
+                    <p class="text-xs text-blue-100" id="mahasiswaNim">NIM: -</p>
+                </div>
+                <button 
+                    id="btnLogout"
+                    class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition flex items-center gap-2"
+                >
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+
+        <!-- Welcome Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                <i class="fas fa-hand-wave text-yellow-500"></i>
+                Selamat Datang, <span id="welcomeName">Mahasiswa</span>!
+            </h2>
+            <p class="text-gray-600">Berikut adalah informasi profil Anda</p>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+            <div class="bg-gradient-to-r from-blue-500 to-cyan-500 p-6">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-id-card"></i>
+                    Profil Saya
+                </h3>
+            </div>
+
+            <div id="profileContent" class="p-6 text-gray-800">
+                <div class="flex items-center justify-center py-8">
+                    <i class="fas fa-spinner fa-spin text-3xl text-blue-500"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvcW5e0tzQqLuzQ4i4vff2D0Jkc09CMd8",
+            authDomain: "data-alumni-b0381.firebaseapp.com",
+            projectId: "data-alumni-b0381",
+            storageBucket: "data-alumni-b0381.appspot.com",
+            messagingSenderId: "852905518914",
+            appId: "1:852905518914:web:71e503f91340991c3d4adb",
+            measurementId: "G-Z8ZLBZDZKY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // === SESSION CHECK ===
+        function checkAuth() {
+            const userSession = sessionStorage.getItem("user");
+            if (!userSession) {
+                window.location.href = "index.html";
+                return null;
+            }
+            try {
+                const user = JSON.parse(userSession);
+                if (user.role !== "mahasiswa") {
+                    window.location.href = "index.html";
+                    return null;
+                }
+                return user;
+            } catch (e) {
+                console.error("Session error:", e);
+                window.location.href = "index.html";
+                return null;
+            }
+        }
+
+        const currentUser = checkAuth();
+        if (!currentUser) throw new Error("Unauthorized");
+
+        // Header info
+        document.getElementById("mahasiswaNama").textContent = currentUser.nama || "Mahasiswa";
+        document.getElementById("mahasiswaNim").textContent = "NIM: " + (currentUser.nim || "-");
+        document.getElementById("welcomeName").textContent = currentUser.nama || "Mahasiswa";
+
+        // Logout
+        document.getElementById("btnLogout").addEventListener("click", () => {
+            sessionStorage.removeItem("user");
+            localStorage.removeItem("mahasiswaNim");
+            window.location.href = "index.html";
+        });
+
+        // Load Profile
+        async function loadProfile() {
+            const profileContent = document.getElementById("profileContent");
+
+            try {
+                const q = query(
+                    collection(db, "mahasiswa"),
+                    where("nim", "==", currentUser.nim)
+                );
+                const snapshot = await getDocs(q);
+
+                if (snapshot.empty) {
+                    profileContent.innerHTML = `<p class="text-center text-red-500">Data mahasiswa tidak ditemukan</p>`;
+                    return;
+                }
+
+                const data = snapshot.docs[0].data();
+
+                profileContent.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <p><strong>NIM:</strong> ${data.nim || '-'}</p>
+                            <p><strong>Nama Lengkap:</strong> ${data.nama || '-'}</p>
+                            <p><strong>TTL:</strong> ${data.tempat_lahir || data.tempatLahir || '-'}, ${data.tanggal_lahir || data.tanggalLahir || '-'}</p>
+                            <p><strong>Jenis Kelamin:</strong> ${data.jenis_kelamin || data.jenisKelamin || '-'}</p>
+                            <p><strong>Jurusan:</strong> ${data.jurusan || '-'}</p>
+                        </div>
+                        <div class="space-y-4">
+                            <p><strong>Email:</strong> ${data.email || '-'}</p>
+                            <p><strong>No HP:</strong> ${data.no_hp || data.noHp || '-'}</p>
+                            <p><strong>Alamat:</strong> ${data.alamat || '-'}</p>
+                            <p><strong>Tahun Keluar:</strong> ${data.tahun_keluar || data.tahunKeluar || '-'}</p>
+                            <p><strong>Pekerjaan:</strong> ${data.pekerjaan || '-'}</p>
+                        </div>
+                    </div>
+                    ${data.judul_skripsi ? `<div class="mt-4"><strong>Judul Skripsi:</strong> ${data.judul_skripsi}</div>` : ''}
+                    ${data.penguji_skripsi ? `<div class="mt-2"><strong>Penguji Skripsi:</strong> ${data.penguji_skripsi}</div>` : ''}
+                `;
+            } catch (err) {
+                console.error(err);
+                profileContent.innerHTML = `<p class="text-center text-red-500">Gagal memuat profil</p>`;
+            }
+        }
+
+        // Initial load
+        loadProfile();
+    </script>
+
+</body>
+</html>

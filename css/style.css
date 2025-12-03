@@ -1,0 +1,90 @@
+body { 
+  font-family: Arial; 
+  margin: 0; 
+  background:#f5f5f5; 
+}
+
+/* NAVBAR */
+.navbar { 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  padding:12px 20px; 
+  background:#0077cc; 
+  color:#fff; 
+  position:sticky;
+  top:0;
+  z-index:1000;
+  margin-bottom:20px; /* FIX supaya input NIM tidak tertutup */
+}
+
+.navbar a { 
+  color:#fff; 
+  text-decoration:none; 
+}
+
+/* LAYOUT */
+.container { 
+  padding:20px; 
+  max-width:1200px; 
+  margin:auto; 
+}
+
+.card { 
+  background:#fff; 
+  padding:20px; 
+  border-radius:8px; 
+  box-shadow:0 2px 6px rgba(0,0,0,0.1); 
+}
+
+/* BUTTON */
+.btn { 
+  padding:6px 12px; 
+  background:#0077cc; 
+  color:#fff; 
+  border:none; 
+  border-radius:4px; 
+  cursor:pointer; 
+}
+
+.btn.small { 
+  padding:4px 8px; 
+  font-size:0.85em; 
+}
+
+.btn.danger { 
+  background:#cc0000; 
+}
+
+/* FORM INPUT */
+input, select, button { 
+  display:block; 
+  width:100%; 
+  margin-bottom:10px; 
+  padding:8px; 
+  border-radius:4px; 
+  border:1px solid #ccc; 
+}
+
+/* Input readonly (misal NIM) */
+input[readonly] {
+  background:#e9ecef;
+  cursor:not-allowed;
+}
+
+/* TABLE */
+table { 
+  width:100%; 
+  border-collapse:collapse; 
+  margin-top:10px; 
+}
+
+th, td { 
+  border:1px solid #ccc; 
+  padding:8px; 
+  text-align:left; 
+}
+
+th { 
+  background:#f2f2f2; 
+}

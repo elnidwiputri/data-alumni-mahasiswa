@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Mahasiswa</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav-left">Edit Mahasiswa</div>
+  <div class="nav-right"><a class="btn small" href="admin-dashboard.html">Kembali</a></div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h3>Edit Data Mahasiswa</h3>
+    <form id="formEdit">
+
+      <label>NIM</label>
+      <input type="text" id="nim" name="nim" readonly required style="background:#f3f3f3; cursor:not-allowed;">
+
+
+      <label>Nama</label>
+      <input type="text" name="nama" required>
+
+      <label>Tempat Lahir</label>
+      <input type="text" name="tempatLahir">
+
+      <label>Tanggal Lahir</label>
+      <input type="date" name="tanggalLahir">
+
+      <label>Jenis Kelamin</label>
+      <select name="jenisKelamin">
+        <option value="">--Pilih--</option>
+        <option value="laki-laki">Laki-laki</option>
+        <option value="perempuan">Perempuan</option>
+      </select>
+
+      <label>Jurusan</label>
+      <input type="text" name="jurusan">
+
+      <label>Email</label>
+      <input type="email" name="email">
+
+      <label>Alamat</label>
+      <input type="text" name="alamat">
+
+      <label>No HP</label>
+      <input type="text" name="noHp">
+
+      <label>Tahun Keluar</label>
+      <input type="text" name="tahunKeluar">
+
+      <label>Judul Skripsi</label>
+      <input type="text" name="judulSkripsi">
+
+      <label>Penguji Skripsi</label>
+      <input type="text" name="pengujiSkripsi">
+
+      <label>Pekerjaan</label>
+      <input type="text" name="pekerjaan">
+
+      <div style="margin-top:12px">
+        <button class="btn" type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { db } from "./js/firebase.js";
+import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const form = document.getElementById("formEdit");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+if (!id) {
+  alert("ID tidak ditemukan");
+  window.location.href = "admin-dashboard.html";
+}
+
+const docRef = doc(db, "mahasiswa", id);
+
+// Load data awal
+(async () => {
+  const snapshot = await getDoc(docRef);
+  if (!snapshot.exists()) {
+    alert("Data tidak ditemukan!");
+    window.location.href = "admin-dashboard.html";
+  } else {
+    const data = snapshot.data();
+    Object.keys(data).forEach(key => {
+      if (form[key]) form[key].value = data[key];
+    });
+  }
+})();
+
+// Submit update
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const updated = Object.fromEntries(new FormData(form).entries());
+
+  await updateDoc(docRef, updated);
+
+  alert("Data berhasil diperbarui!");
+  window.location.href = "admin-dashboard.html";
+});
+</script>
+
+</body>
+</html>

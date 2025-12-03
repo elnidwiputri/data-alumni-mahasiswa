@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sistem Data Alumni</title>
+  <style>
+    body {font-family: Arial; background:#f2f2f2; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
+    .login-box {background:#fff; padding:40px; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,0.1); width:300px;}
+    .login-box h2 {text-align:center; margin-bottom:10px;}
+    .login-box p {text-align:center; color:#374151;}
+    .login-box .btn {display:block; text-align:center; padding:10px; margin:5px 0; background:#007bff; color:#fff; text-decoration:none; border-radius:6px;}
+    .login-box .btn.mahasiswa {background:#16a34a;}
+    .info-box {margin-top:12px; font-size:12px; color:#555;}
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Sistem Data Alumni</h2>
+    <p>Pilih jenis akun untuk masuk</p>
+
+    <a class="btn" href="login-admin.html">Login Admin</a>
+    <a class="btn mahasiswa" href="login-mahasiswa.html">Login Mahasiswa</a>
+
+    <div class="info-box">
+      <strong>Catatan:</strong><br>
+      Admin login memakai <em>email + nama</em> (nama dipakai sebagai password).<br>
+      Mahasiswa login memakai <em>username + NIM</em>.
+    </div>
+  </div>
+</body>
+</html>

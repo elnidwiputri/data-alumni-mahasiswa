@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Mahasiswa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-user-plus text-3xl text-indigo-600"></i>
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Tambah Data Mahasiswa</h1>
+                        <p class="text-gray-600">Lengkapi formulir di bawah ini</p>
+                    </div>
+                </div>
+                <a href="admin-dashboard.html" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <form id="formTambah">
+                <div class="space-y-4">
+                    <!-- Row 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                NIM <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="nim"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="Masukkan NIM"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Nama Lengkap <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="nama"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="Masukkan nama lengkap"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Tempat Lahir
+                            </label>
+                            <input
+                                type="text"
+                                name="tempatLahir"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="Masukkan tempat lahir"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Tanggal Lahir
+                            </label>
+                            <input
+                                type="date"
+                                name="tanggalLahir"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Jenis Kelamin
+                            </label>
+                            <select
+                                name="jenisKelamin"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                            >
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Jurusan
+                            </label>
+                            <input
+                                type="text"
+                                name="jurusan"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="Masukkan jurusan"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Email <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="contoh@email.com"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                No HP
+                            </label>
+                            <input
+                                type="tel"
+                                name="noHp"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="08xxxxxxxxxx"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Row 5 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Tahun Keluar
+                            </label>
+                            <input
+                                type="number"
+                                name="tahunKeluar"
+                                min="1900"
+                                max="2100"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="2024"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Pekerjaan
+                            </label>
+                            <input
+                                type="text"
+                                name="pekerjaan"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                placeholder="Masukkan pekerjaan"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Alamat -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Alamat
+                        </label>
+                        <textarea
+                            name="alamat"
+                            rows="3"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                            placeholder="Masukkan alamat lengkap"
+                        ></textarea>
+                    </div>
+
+                    <!-- Judul Skripsi -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Judul Skripsi
+                        </label>
+                        <textarea
+                            name="judulSkripsi"
+                            rows="2"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                            placeholder="Masukkan judul skripsi"
+                        ></textarea>
+                    </div>
+
+                    <!-- Penguji Skripsi -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Penguji Skripsi
+                        </label>
+                        <input
+                            type="text"
+                            name="pengujiSkripsi"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                            placeholder="Contoh: Dr. John Doe, M.Kom"
+                        >
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex gap-3 pt-4">
+                        <button
+                            type="submit"
+                            id="btnSimpan"
+                            class="flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+                        >
+                            <i class="fas fa-save"></i>
+                            <span>Simpan Data</span>
+                        </button>
+                        <a
+                            href="admin-dashboard.html"
+                            class="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                            <i class="fas fa-times"></i>
+                            <span>Batal</span>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script Firebase (EMBEDDED - Tidak Perlu file firebase.js) -->
+    <script type="module">
+        // === IMPORT FIREBASE ===
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // === FIREBASE CONFIG ===
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvcW5e0tzQqLuzQ4i4vff2D0Jkc09CMd8",
+            authDomain: "data-alumni-b0381.firebaseapp.com",
+            projectId: "data-alumni-b0381",
+            storageBucket: "data-alumni-b0381.appspot.com",
+            messagingSenderId: "852905518914",
+            appId: "1:852905518914:web:71e503f91340991c3d4adb",
+            measurementId: "G-Z8ZLBZDZKY"
+        };
+
+        // === INITIALIZE FIREBASE ===
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        console.log("✅ Firebase initialized successfully");
+
+        // === FORM HANDLER ===
+        const form = document.getElementById("formTambah");
+        const btnSimpan = document.getElementById("btnSimpan");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Disable tombol submit
+            btnSimpan.disabled = true;
+            btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span>Menyimpan...</span>';
+
+            try {
+                // Ambil data dari form
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                console.log("📝 Data form:", data);
+
+                // Validasi data wajib
+                if (!data.nim || !data.nama || !data.email) {
+                    throw new Error("NIM, Nama, dan Email harus diisi!");
+                }
+
+                // Validasi format email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.email)) {
+                    throw new Error("Format email tidak valid!");
+                }
+
+                // Bersihkan data kosong
+                Object.keys(data).forEach(key => {
+                    if (data[key] === "" || data[key] === null || data[key] === undefined) {
+                        delete data[key];
+                    }
+                });
+
+                // Tambahkan timestamp
+                data.createdAt = Timestamp.now();
+                data.updatedAt = Timestamp.now();
+
+                console.log("💾 Saving to Firestore...", data);
+
+                // Simpan ke Firestore
+                const docRef = await addDoc(collection(db, "mahasiswa"), data);
+                
+                console.log("✅ Document added with ID:", docRef.id);
+                
+                // Tampilkan notifikasi sukses
+                alert("✅ Data mahasiswa berhasil ditambahkan!\n\nID: " + docRef.id);
+                
+                // Reset form
+                form.reset();
+                
+                // Optional: Redirect ke dashboard setelah 1 detik
+                setTimeout(() => {
+                    window.location.href = "admin-dashboard.html";
+                }, 1000);
+
+            } catch (err) {
+                console.error("❌ Error:", err);
+                
+                // Handle berbagai jenis error
+                let errorMessage = "Terjadi kesalahan saat menyimpan data.";
+                
+                if (err.code === "permission-denied") {
+                    errorMessage = "❌ Permission Denied!\n\n";
+                    errorMessage += "Solusi:\n";
+                    errorMessage += "1. Buka Firebase Console\n";
+                    errorMessage += "2. Pilih Firestore Database\n";
+                    errorMessage += "3. Klik tab 'Rules'\n";
+                    errorMessage += "4. Ubah rules menjadi:\n\n";
+                    errorMessage += "allow read, write: if true;";
+                } else if (err.code === "unavailable") {
+                    errorMessage = "❌ Koneksi ke database gagal!\n\nPeriksa koneksi internet Anda.";
+                } else if (err.code === "not-found") {
+                    errorMessage = "❌ Collection 'mahasiswa' tidak ditemukan!\n\nPastikan Firestore sudah aktif di Firebase Console.";
+                } else if (err.message) {
+                    errorMessage = "❌ " + err.message;
+                }
+                
+                alert(errorMessage);
+                
+            } finally {
+                // Enable kembali tombol submit
+                btnSimpan.disabled = false;
+                btnSimpan.innerHTML = '<i class="fas fa-save"></i><span>Simpan Data</span>';
+            }
+        });
+
+        // === TEST CONNECTION ===
+        console.log("🔍 Testing Firebase connection...");
+        console.log("Database instance:", db);
+    </script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Mhasiswa - Data Alumni</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .login-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 420px;
+            animation: slideIn 0.4s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 36px;
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+        }
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .links a {
+            color: #4facfe;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .links a:hover {
+            color: #00f2fe;
+        }
+        .divider {
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        .divider span {
+            background: white;
+            padding: 0 10px;
+            position: relative;
+            color: #999;
+            font-size: 13px;
+        }
+        .info-box {
+            margin-top: 20px;
+            padding: 12px;
+            background: #e3f5ff;
+            border-left: 4px solid #4facfe;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <div class="logo-icon">👨‍🎓</div>
+            <h1>Login Mahasiswa</h1>
+            <p class="subtitle">Portal Data Alumni</p>
+        </div>
+
+        <form id="formMahasiswa">
+            <div class="form-group">
+                <label for="nim">🎓 NIM</label>
+                <input 
+                    id="nim" 
+                    type="text" 
+                    placeholder="Masukkan NIM Anda" 
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">🔑 Password</label>
+                <input 
+                    id="password" 
+                    type="password" 
+                    placeholder="Masukkan password Anda" 
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button class="btn-login" type="submit" id="btnLogin">
+                Masuk
+            </button>
+        </form>
+
+        <div id="status" class="status"></div>
+
+        <div class="divider">
+            <span>atau</span>
+        </div>
+
+        <div class="links">
+            <a href="index.html">← Kembali ke Login Admin</a>
+        </div>
+
+        <div class="info-box">
+            <strong>ℹ️ Informasi Login:</strong><br>
+            Gunakan <b>NIM</b> dan <b>Password</b> yang sudah terdaftar. Hubungi admin jika lupa password.
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvcW5e0tzQqLuzQ4i4vff2D0Jkc09CMd8",
+            authDomain: "data-alumni-b0381.firebaseapp.com",
+            projectId: "data-alumni-b0381",
+            storageBucket: "data-alumni-b0381.appspot.com",
+            messagingSenderId: "852905518914",
+            appId: "1:852905518914:web:71e503f91340991c3d4adb",
+            measurementId: "G-Z8ZLBZDZKY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        console.log("✅ Firebase initialized");
+
+        const form = document.getElementById("formMahasiswa");
+        const btnLogin = document.getElementById("btnLogin");
+        const statusDiv = document.getElementById("status");
+
+        function showStatus(message, type = 'error') {
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const nim = document.getElementById("nim").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!nim || !password) {
+                showStatus("❌ NIM dan password harus diisi!", 'error');
+                return;
+            }
+
+            btnLogin.disabled = true;
+            btnLogin.innerHTML = '<span class="spinner"></span> Memproses...';
+
+            try {
+                console.log("🔍 Login attempt - NIM:", nim);
+
+                // Query ke collection login_mahasiswa berdasarkan NIM
+                const q = query(
+                    collection(db, "login_mahasiswa"), 
+                    where("nim", "==", nim)
+                );
+                
+                const snapshot = await getDocs(q);
+
+                console.log("📊 Documents found:", snapshot.docs.length);
+
+                // Cek apakah NIM ditemukan
+                if (snapshot.empty) {
+                    console.log("❌ NIM not found");
+                    showStatus("❌ NIM tidak terdaftar!", 'error');
+                    return;
+                }
+
+                // Ambil data login
+                const loginDoc = snapshot.docs[0];
+                const loginData = loginDoc.data();
+                
+                console.log("🔐 Login data:", loginData);
+
+                // Validasi password
+                if (loginData.password !== password) {
+                    console.log("❌ Password salah");
+                    showStatus("❌ Password salah!", 'error');
+                    return;
+                }
+
+                // Validasi role
+                if (loginData.role !== "mahasiswa") {
+                    console.log("❌ Role bukan mahasiswa");
+                    showStatus("❌ Akun ini bukan mahasiswa!", 'error');
+                    return;
+                }
+
+                // ✅ LOGIN BERHASIL - Ambil data lengkap dari collection mahasiswa
+                console.log("✅ Login successful! Loading full profile...");
+
+                // Cari data mahasiswa berdasarkan NIM
+                const mahasiswaQuery = query(
+                    collection(db, "mahasiswa"),
+                    where("nim", "==", nim)
+                );
+                const mahasiswaSnapshot = await getDocs(mahasiswaQuery);
+
+                let mahasiswaData = {
+                    nama: loginData.username || "Mahasiswa",
+                    nim: loginData.nim,
+                    uid: loginData.uid || loginDoc.id
+                };
+
+                // Jika data mahasiswa ditemukan, gunakan data lengkap
+                if (!mahasiswaSnapshot.empty) {
+                    const fullData = mahasiswaSnapshot.docs[0].data();
+                    mahasiswaData = {
+                        ...mahasiswaData,
+                        ...fullData,
+                        docId: mahasiswaSnapshot.docs[0].id
+                    };
+                    console.log("✅ Full mahasiswa data loaded:", mahasiswaData);
+                }
+
+                // Simpan session
+                const userSession = {
+                    role: "mahasiswa",
+                    nim: mahasiswaData.nim,
+                    nama: mahasiswaData.nama,
+                    email: mahasiswaData.email || "",
+                    uid: mahasiswaData.uid,
+                    docId: mahasiswaData.docId || loginDoc.id
+                };
+
+                sessionStorage.setItem("user", JSON.stringify(userSession));
+                localStorage.setItem("mahasiswaNim", mahasiswaData.nim);
+
+                showStatus("✅ Login berhasil! Selamat datang " + mahasiswaData.nama, 'success');
+
+                // Redirect ke dashboard mahasiswa
+                setTimeout(() => {
+                    window.location.href = "mahasiswa-dashboard.html";
+                }, 1500);
+
+            } catch (err) {
+                console.error("❌ Login error:", err);
+                console.error("Error code:", err.code);
+                console.error("Error message:", err.message);
+
+                let errorMessage = "Terjadi kesalahan koneksi ke database.";
+
+                if (err.code === "permission-denied") {
+                    errorMessage = "❌ Permission Denied!\n\nSolusi:\n1. Buka Firebase Console\n2. Pilih Firestore Database\n3. Klik tab 'Rules'\n4. Pastikan collection 'login_mahasiswa' bisa dibaca";
+                } else if (err.code === "unavailable") {
+                    errorMessage = "❌ Database tidak tersedia. Cek koneksi internet!";
+                } else if (err.message) {
+                    errorMessage = "❌ " + err.message;
+                }
+
+                showStatus(errorMessage, 'error');
+
+            } finally {
+                btnLogin.disabled = false;
+                btnLogin.textContent = "Masuk";
+            }
+        });
+
+        // Auto-redirect jika sudah login
+        const userSession = sessionStorage.getItem("user");
+        if (userSession) {
+            try {
+                const user = JSON.parse(userSession);
+                if (user.role === "mahasiswa") {
+                    console.log("👤 Already logged in:", user.nama);
+                    // Optional: auto redirect
+                    // window.location.href = "mahasiswa-dashboard.html";
+                }
+            } catch (e) {
+                console.error("Session error:", e);
+            }
+        }
+    </script>
+</body>
+</html>
