@@ -166,14 +166,11 @@ data_mahasiswa/
 
 ## Screenshot Aplikasi
 
-### Halaman Login Admin
-![Login Admin](screenshots/login-admin.png)
-
 ### Dashboard Admin
-![Dashboard Admin](screenshots/dashboard-admin.png)
+![Dashboard Admin](assets/gambar1.png)
 
 ### Dashboard Mahasiswa
-![Dashboard Mahasiswa](screenshots/dashboard-mahasiswa.png)
+![Dashboard Mahasiswa](assets/gambar2.png)
 
 ---
 
