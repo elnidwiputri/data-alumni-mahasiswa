@@ -63,7 +63,6 @@ Membangun sistem pengelolaan data alumni yang:
 - Menambahkan data mahasiswa/alumni
 - Mengedit data mahasiswa/alumni
 - Menghapus data mahasiswa/alumni
-- Melihat statistik alumni
 - Mencari data berdasarkan `NIM`, `nama`, atau `email`
 - Membuat akun login untuk mahasiswa
 
@@ -85,8 +84,8 @@ Membangun sistem pengelolaan data alumni yang:
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/username/sistem-data-alumni.git
-   cd sistem-data-alumni
+   git clone https://github.com/elnidwiputri/data-alumni-mahasiswa.git
+   cd data-alumni-mahasiswa
    ```
 
 2. **Konfigurasi Firebase**
@@ -158,9 +157,9 @@ data_mahasiswa/
 
 ## Link Penting
 
-- **Link Deployment:** `https://project-name.web.app`
-- **Link Repository:** `https://github.com/username/sistem-data-alumni`
-- **Link Demo Video:** `https://youtu.be/xxx`
+- **Link Deployment:** `https://data-alumni-mahasiswa.web.app`
+- **Link Repository:** `https://github.com/elnidwiputri/data-alumni-mahasiswa`
+- **Link Demo Video:** `https://drive.google.com/file/d/1jyrMIK1k1FXuajSpcVaMxnJXF49S3r93/view?usp=sharing
 
 ---
 
